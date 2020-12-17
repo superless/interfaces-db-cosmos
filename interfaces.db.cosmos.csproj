@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="connect" Version="0.8.51" />
+    <PackageReference Include="Cosmonaut" Version="2.11.3" />
+    <PackageReference Include="entities.cosmos" Version="0.8.56" />
+  </ItemGroup>
+
+ 
+
+</Project>
