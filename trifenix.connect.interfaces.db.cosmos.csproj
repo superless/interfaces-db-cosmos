@@ -52,9 +52,7 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="trifenix.connect" Version="0.8.66" />
-    <PackageReference Include="Cosmonaut" Version="2.11.3" />
-    <PackageReference Include="trifenix.connect.entities.cosmos" Version="0.8.58" />
+    <PackageReference Include="trifenix.connect.entities.cosmos" Version="0.8.59" />
   </ItemGroup>
 
  
