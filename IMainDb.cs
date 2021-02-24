@@ -1,8 +1,7 @@
-﻿using Cosmonaut;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using trifenix.connect.entities.cosmos;
+using trifenix.model;
 
 namespace trifenix.connect.interfaces.db.cosmos
 {
@@ -12,7 +11,7 @@ namespace trifenix.connect.interfaces.db.cosmos
     /// 
     /// </summary>
     /// <typeparam name="T">Todos los elementos que heredan de documentbase son de base de datos de persistencia</typeparam>
-    public interface IMainGenericDb<T> where T : DocumentBase {
+    public interface IMainGenericDb<T> where T : DocumentDb {
 
         
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using trifenix.connect.entities.cosmos;
+using trifenix.model;
 
 namespace trifenix.connect.interfaces.db.cosmos
 {
@@ -15,7 +15,7 @@ namespace trifenix.connect.interfaces.db.cosmos
     /// Esta implementación deberá estar presente en otras bases de datos, incluso aunque tengan que pasarla a ToList.
     /// </summary>
     /// <typeparam name="T">Elemento de una base de datos</typeparam>
-    public interface ICommonDbOperations<T> where T:DocumentBase {
+    public interface ICommonDbOperations<T> where T:DocumentDb {
 
         /// <summary>
         /// Retorna una lista de elementos desde un IQueryable.

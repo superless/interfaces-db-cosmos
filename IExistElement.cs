@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using trifenix.connect.entities.cosmos;
+using trifenix.model;
 
 namespace trifenix.connect.interfaces.db.cosmos
 {
@@ -16,7 +16,7 @@ namespace trifenix.connect.interfaces.db.cosmos
         /// <typeparam name="T">Tipo de Clase que debe ir a buscar</typeparam>
         /// <param name="id">identificador a buscar</param>
         /// <returns>true si existe</returns>
-        Task<bool> ExistsById<T>(string id) where T : DocumentBase;
+        Task<bool> ExistsById<T>(string id) where T : DocumentDb;
 
         /// <summary>
         /// Determina si existe un elemento con cierta propiedad, asignando el nombre de la propiedad y el valor que debe chequear.
@@ -29,7 +29,7 @@ namespace trifenix.connect.interfaces.db.cosmos
         /// <param name="valueCheck">valor de la propiedad</param>
         /// <param name="id">identificador del elemento, que no debe ser incluido</param>
         /// <returns>True si existe</returns>
-        Task<bool> ExistsWithPropertyValue<T>(string namePropCheck, string valueCheck, string id = null) where T : DocumentBase;
+        Task<bool> ExistsWithPropertyValue<T>(string namePropCheck, string valueCheck, string id = null) where T : DocumentDb;
 
 
       
