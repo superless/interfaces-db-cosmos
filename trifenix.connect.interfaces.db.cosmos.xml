@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>trifenix.connect.interfaces.db.cosmos</name>
+    </assembly>
+    <members>
+        <member name="T:trifenix.connect.interfaces.db.cosmos.ICommonDbOperations`1">
+            <summary>
+            CosmosDb usa un método static que transforma el resultado como IQueryable, en una lista con resultados.
+            Para poder testearlo usamos esta interface, lo que permite obviar el iqueriable y retornar el resultado que deseemos
+            o leer lo que deseemos del IQueriable formado por CosmosDb.
+            Esta implementación deberá estar presente en otras bases de datos, incluso aunque tengan que pasarla a ToList.
+            </summary>
+            <typeparam name="T">Elemento de una base de datos</typeparam>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.ICommonDbOperations`1.TolistAsync(System.Linq.IQueryable{`0})">
+            <summary>
+            Retorna una lista de elementos desde un IQueryable.
+            </summary>
+            <param name="list">IQueryable a convertir</param>
+            <returns>Listado de elementos</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.ICommonDbOperations`1.FirstOrDefaultAsync(System.Linq.IQueryable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            El primer elemento que encuentre desde una lista filtrada por el parámetro de entrada (predicate).
+            </summary>
+            <param name="list">IQueryable a convertir</param>
+            <param name="predicate">filtro de busqueda</param>
+            <returns></returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.ICommonDbOperations`1.WithPagination(System.Linq.IQueryable{`0},System.Int32,System.Int32)">
+            <summary>
+            Este método usa un IQueriable y lo convierte en un resultado determinado por la página que determine y que es cálculado
+            de acuerdo a el número total de elentos que se perniten en cada página.
+            este método es bastante dependiente de Cosmonaut, dado que este usa un Iqueriable para convertir en una colección páginada.
+            </summary>
+            <param name="list">IQueriable a consultar</param>
+            <param name="page">página a buscar</param>
+            <param name="totalElementsOnPage">total de elementos en página</param>
+            <returns></returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.db.cosmos.IExistElement">
+            <summary>
+            Interface para mantener todas las consultas a una base de datos o colección que determinen 
+            la existencia de un elemento.
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IExistElement.ExistsById``1(System.String)">
+            <summary>
+            Devuelve true si el elemento ya existe.
+            </summary>
+            <typeparam name="T">Tipo de Clase que debe ir a buscar</typeparam>
+            <param name="id">identificador a buscar</param>
+            <returns>true si existe</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IExistElement.ExistsWithPropertyValue``1(System.String,System.String,System.String)">
+            <summary>
+            Determina si existe un elemento con cierta propiedad, asignando el nombre de la propiedad y el valor que debe chequear.
+            si incluye el id, el método debería buscar en toda la base de datos, excepto el elemento con el id ingresado,
+            si no verificará si existe en todos los elementos.
+            El foco de este método es verificar.
+            </summary>
+            <typeparam name="T">Tipo de clase a buscar</typeparam>
+            <param name="namePropCheck">nombre de la propiedad</param>
+            <param name="valueCheck">valor de la propiedad</param>
+            <param name="id">identificador del elemento, que no debe ser incluido</param>
+            <returns>True si existe</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1">
+            <summary>
+            Operaciones básicas para base de datos de persistencia
+            
+            </summary>
+            <typeparam name="T">Todos los elementos que heredan de documentbase son de base de datos de persistencia</typeparam>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1.CreateUpdate(`0)">
+            <summary>
+            añade o actualiza un elemento en la base de datos.
+            </summary>
+            <param name="entity">entidad a añadir o actualizar</param>
+            <returns>identificador de la entidad</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1.GetEntity(System.String)">
+            <summary>
+            Obtiene la entidad desde un id
+            </summary>
+            <param name="uniqueId">identificador del elemento</param>
+            <returns>Retorna el elemento</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1.DeleteEntity(System.String)">
+            <summary>
+            Borra una entidad
+            </summary>
+            <param name="id">identidicador de la entidad</param>
+            <returns></returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1.SingleQuery``1(System.String,System.Object[])">
+            <summary>
+            Ejecuta consulta en la base de datos, asignando un tipo de valor esperado,
+            esto puede ser un int, un string, un bool o incluso una entidad como Persona.
+            las consultas deben obedecer al tipo de dato esperado.
+            </summary>
+            <typeparam name="T2">Tipo de valor esperado</typeparam>
+            <param name="query">consulta a la base de datos</param>
+            <param name="args">parámetros de la consulta</param>
+            <returns>elemento de tipo T2</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.cosmos.IMainGenericDb`1.MultipleQuery``1(System.String,System.Object[])">
+            <summary>
+            Ejecuta una consulta en la base de datos que retornará multiples elementos de tipo T2
+            donde T2 puede ser cualquier tipo que puediera devolver la base de datos,
+            obedeciendo a la consulta como parámetro.
+            </summary>
+            <typeparam name="T2">Tipo a retornar, puede ser string, int u una entidad como Persona</typeparam>
+            <param name="query">consulta</param>
+            <param name="args">argumentos de esa consulta</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
